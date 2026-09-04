@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Configurable API Base URL via Vite environment variables
 // Falls back to http://localhost:5000/api if VITE_API_BASE_URL is not set
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5001/api';
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,

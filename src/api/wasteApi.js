@@ -4,13 +4,6 @@ import { createWasteAnalysisModel } from '../models';
 
 export const wasteApi = {
   async analyzeWaste(imageFileOrUrl) {
-    if (USE_MOCK_API) {
-      const res = await mockAdapter.analyzeWaste(imageFileOrUrl);
-      return {
-        ...res,
-        analysis: createWasteAnalysisModel(res.analysis)
-      };
-    }
     try {
       const formData = new FormData();
       if (imageFileOrUrl instanceof File) {
@@ -27,12 +20,8 @@ export const wasteApi = {
         analysis: createWasteAnalysisModel(res.analysis || res)
       };
     } catch (err) {
-      console.warn('[wasteApi.analyzeWaste] API error, using mock vision analyzer:', err.message);
-      const res = await mockAdapter.analyzeWaste(imageFileOrUrl);
-      return {
-        ...res,
-        analysis: createWasteAnalysisModel(res.analysis)
-      };
+      const message = err.response?.data?.error || err.message || 'AI Vision analysis service request failed.';
+      throw new Error(message);
     }
   },
 

@@ -18,9 +18,10 @@ export const useWasteAnalysis = () => {
         throw new Error('Invalid analysis response structure from AI service');
       }
     } catch (err) {
-      console.error('[useWasteAnalysis] Error analyzing waste image:', err);
-      setError(err.message || 'AI analysis failed. Please try again with a clear photo.');
-      throw err;
+      const errorMsg = err.response?.data?.error || err.message || 'AI Vision analysis service is not integrated into this backend.';
+      console.error('[useWasteAnalysis] Error analyzing waste image:', errorMsg);
+      setError(errorMsg);
+      throw new Error(errorMsg);
     } finally {
       setAnalyzing(false);
     }

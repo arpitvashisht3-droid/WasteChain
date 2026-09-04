@@ -78,7 +78,7 @@ export const mockAdapter = {
 
   // Waste & AI
   async analyzeWaste(imageFileOrUrl) {
-    return await mockWasteAI.analyzeImage(imageFileOrUrl);
+    throw new Error('AI Vision analysis service is not integrated into this backend.');
   },
 
   async getCategories() {

@@ -16,8 +16,8 @@ export const wasteApi = {
       });
       return res;
     } catch (err) {
-      // Fallback mock AI evaluation
-      return await mockWasteAI.analyzeImage(imageFileOrUrl);
+      const message = err.response?.data?.error || err.message || 'AI Vision analysis service is not integrated into this backend.';
+      throw new Error(message);
     }
   },
 

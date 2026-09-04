@@ -110,7 +110,7 @@ export const WasteScannerPage = () => {
       setScannerState('result');
       toast.success('AI waste identification complete!');
     } catch (err) {
-      toast.error(err.message || 'Analysis failed. Please try scanning again.');
+      toast.error(err.message || 'AI Vision analysis service is not integrated into this backend.');
       setScannerState('preview');
     }
   };
@@ -303,6 +303,16 @@ export const WasteScannerPage = () => {
               Remove Image
             </Button>
           </div>
+
+          {error && (
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 flex items-start gap-3 text-sm">
+              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-bold text-amber-900">Analysis Error</p>
+                <p className="text-xs text-amber-800 mt-0.5">{error}</p>
+              </div>
+            </div>
+          )}
 
           <div className="relative aspect-video w-full max-w-2xl mx-auto rounded-2xl overflow-hidden bg-slate-900 border-2 border-slate-200 shadow-lg">
             <img src={selectedImage} alt="Selected waste" className="w-full h-full object-cover" />
